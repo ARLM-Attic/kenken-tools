@@ -13,7 +13,7 @@ using System.Globalization;
 
 namespace KenKenSL
 {
-    internal partial class Group : UserControl
+    public partial class Group : UserControl
     {
         public event EventHandler PaintClicked;
         private List<Cell> cells;
@@ -84,7 +84,7 @@ namespace KenKenSL
             }
         }
 
-        public IEnumerable<Cell> Cells
+        internal IEnumerable<Cell> Cells
         {
             get { return this.cells; }
         }
@@ -113,7 +113,7 @@ namespace KenKenSL
             }
         }
 
-        public CellManager CellManager
+        internal CellManager CellManager
         {
             set { this.cellManager = value; }
         }
@@ -123,7 +123,7 @@ namespace KenKenSL
         /// </summary>
         /// <param name="cell">Cell to add</param>
         /// <returns>True if successfully added, otherwise false</returns>
-        public bool AddCell(Cell cell)
+        internal bool AddCell(Cell cell)
         {
             if (this.cells.Count > 0)
             {
@@ -153,7 +153,7 @@ namespace KenKenSL
         /// </summary>
         /// <param name="cell">Cell to remove</param>
         /// <returns>True if successfully removed, otherwise false</returns>
-        public bool RemoveCell(Cell cell)
+        internal bool RemoveCell(Cell cell)
         {
             bool remove = false;
             int adjacencyCount = this.cellManager.AdjacencyCount(cell);

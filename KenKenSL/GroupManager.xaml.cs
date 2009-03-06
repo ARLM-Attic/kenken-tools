@@ -12,7 +12,7 @@ using System.Windows.Shapes;
 
 namespace KenKenSL
 {
-    internal partial class GroupManager : UserControl
+    public partial class GroupManager : UserControl
     {
         private List<Group> groups;
         private Group activeGroup;
@@ -37,7 +37,7 @@ namespace KenKenSL
             get { return this.groups; }
         }
 
-        public CellManager CellManager
+        internal CellManager CellManager
         {
             get { 
                 return this.cellManager; 

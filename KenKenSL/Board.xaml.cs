@@ -16,7 +16,7 @@ namespace KenKenSL
     /// Board is a creator class for creating sets of cells
     /// with a particular representation
     /// </summary>
-    internal partial class Board : UserControl
+    public partial class Board : UserControl
     {
         private int size;
         private GroupManager groupManager;
@@ -58,7 +58,7 @@ namespace KenKenSL
         /// CellManager must be supplied to associate backend representation
         /// with visual cells
         /// </summary>
-        public CellManager CellManager
+        internal CellManager CellManager
         {
             set { this.cellManager = value; }
         }
