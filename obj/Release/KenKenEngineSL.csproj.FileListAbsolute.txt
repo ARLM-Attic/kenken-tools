@@ -1,0 +1,5 @@
+D:\john\devel\KenKenEngineSL\Bin\Release\KenKenEngineSL.dll
+D:\john\devel\KenKenEngineSL\Bin\Release\KenKenEngineSL.pdb
+D:\john\devel\KenKenEngineSL\obj\Release\ResolveAssemblyReference.cache
+D:\john\devel\KenKenEngineSL\obj\Release\KenKenEngineSL.dll
+D:\john\devel\KenKenEngineSL\obj\Release\KenKenEngineSL.pdb
