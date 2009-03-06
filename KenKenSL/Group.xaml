@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="KenKenSL.Group"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    Width="Auto" Height="Auto">
+    <Grid x:Name="LayoutRoot" Background="White" MouseLeftButtonUp="components_MouseLeftButtonUp">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Name="spControlLayout" Orientation="Horizontal" Margin="20,5,20,5">
+            <TextBox Name="tbTotal" Width="40" Margin="3" TextChanged="tbTotal_TextChanged" MouseLeftButtonUp="components_MouseLeftButtonUp" GotFocus="components_Click"/>
+            <ComboBox Name="cbOperation" Margin="3" SelectionChanged="cbOperation_SelectionChanged" MouseLeftButtonUp="components_MouseLeftButtonUp" GotFocus="components_Click">
+                <ComboBoxItem Content="+" />
+                <ComboBoxItem Content="-" />
+                <ComboBoxItem Content="&#xD7;" />
+                <ComboBoxItem Content="&#xF7;" />
+                <ComboBoxItem Content=" " />
+            </ComboBox>
+            
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="KenKenSL.Page"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Width="560" Height="420">
+    <Grid x:Name="LayoutRoot" Background="White">
+        <Border BorderBrush="Black" BorderThickness="1">
+            <Grid Name="gridOuter">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                
+                <Grid x:Name="gridComponents" Grid.Column="0" Grid.Row="0">    
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="180"/>
+                        <ColumnDefinition Width="380"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                </Grid>
+                <TextBlock Name="tbTitle" Text="KenKen Solver" FontSize="30" Grid.Column="0"  Grid.Row="0" HorizontalAlignment="Center" Padding="60" />
+                <StackPanel Name="spButtons" Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1" Margin="10">
+                    <TextBlock Name="tbSolveStatus" Margin="3" Padding="3" FontWeight="Bold" Text="0 Solutions:" Visibility="Collapsed"/>
+                    <Button Name="bSolve" Content="Solve" Click="bSolve_Click" Margin="3"  Visibility="Collapsed"/>
+                    <Button Name="bSolnPrev" Content="Prev" Click="bSolnPrev_Click" Margin="3" IsEnabled="False" Visibility="Collapsed"/>
+                    <Button Name="bSolnNext" Content="Next" Click="bSolnNext_Click" Margin="3"  Visibility="Collapsed"/>
+                    <TextBlock Margin="3" Padding="3" FontWeight="Bold" Text="New Board Size:" />
+                    <Button Name="bSize4" Content="4x4" Click="bSize4_Click" Margin="3" />
+                    <Button Name="bSize6" Content="6x6" Click="bSize6_Click" Margin="3" />
+                    
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+    
+</UserControl>
