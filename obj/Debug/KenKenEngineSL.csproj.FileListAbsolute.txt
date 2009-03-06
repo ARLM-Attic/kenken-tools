@@ -1,5 +1,0 @@
-D:\john\devel\KenKenEngineSL\obj\Debug\ResolveAssemblyReference.cache
-D:\john\devel\KenKenEngineSL\Bin\Debug\KenKenEngineSL.dll
-D:\john\devel\KenKenEngineSL\Bin\Debug\KenKenEngineSL.pdb
-D:\john\devel\KenKenEngineSL\obj\Debug\KenKenEngineSL.dll
-D:\john\devel\KenKenEngineSL\obj\Debug\KenKenEngineSL.pdb
