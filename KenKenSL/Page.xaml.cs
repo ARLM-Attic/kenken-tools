@@ -29,6 +29,20 @@ namespace KenKenSL
         public Page()
         {
             InitializeComponent();
+            this.KeyDown += new KeyEventHandler(Page_KeyDown);
+        }
+
+        void Page_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.G &&
+                (Keyboard.Modifiers == ModifierKeys.Control) ||
+                (Keyboard.Modifiers == ModifierKeys.Apple))
+            {
+                if (this.groupManager != null)
+                {
+                    this.groupManager.AddAndFocusGroup();
+                }
+            }
         }
 
         private void createComponents(int size)
@@ -59,9 +73,15 @@ namespace KenKenSL
         {
             createComponents(4);
         }
+        
         private void bSize6_Click(object sender, RoutedEventArgs e)
         {
             createComponents(6);
+        }
+
+        private void bSize8_Click(object sender, RoutedEventArgs e)
+        {
+            createComponents(8);
         }
 
         private void bSolnPrev_Click(object sender, RoutedEventArgs e)
@@ -99,11 +119,18 @@ namespace KenKenSL
                 this.solver.CancelAsync();
                 return;
             }
-            
+
             solver = new Solver(this.size);
             foreach (Group group in this.groupManager.Groups)
             {
-                if (group.IsValid == false || group.CellCount == 0)
+                if (group.IsValid == false && group.CellCount != 0)
+                {
+                    this.tbSolveStatus.Text = "One or more groups are not valid: ";
+                    this.solver = null;
+                    return;
+                }
+
+                if (group.CellCount == 0)
                     continue;
 
                 List<Coordinates> coordinatesSet = new List<Coordinates>();

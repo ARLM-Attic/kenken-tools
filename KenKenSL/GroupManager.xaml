@@ -20,7 +20,7 @@
             </Grid.RowDefinitions>
             <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" Width="170" HorizontalAlignment="Left">
                 <TextBlock Name="tblkGroupsHeader"  FontWeight="Bold" Text="Groups:" Padding="3" Margin="3" HorizontalAlignment="Left"/>
-                <Button Name="bAddGroup" Content="Add Group" Click="bAddGroup_Click" Margin="3"/>
+                <Button Name="bAddGroup" Content="Add Group" Click="bAddGroup_Click" Margin="3" ToolTipService.ToolTip="Ctrl+G"/>
             </StackPanel>
             <Border Name="bdrGroup" BorderBrush="DarkGray" BorderThickness="1" Grid.Column="0" Grid.Row="1" Margin="3">
                 <ScrollViewer Name="svGroups"  MaxHeight="330" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Auto"  BorderBrush="DarkGray" BorderThickness="2" >

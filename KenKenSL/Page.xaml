@@ -32,7 +32,7 @@
                     <TextBlock Margin="3" Padding="3" FontWeight="Bold" Text="New Board Size:" />
                     <Button Name="bSize4" Content="4x4" Click="bSize4_Click" Margin="3" />
                     <Button Name="bSize6" Content="6x6" Click="bSize6_Click" Margin="3" />
-                    
+                    <Button Name="bSize8" Content="8x8" Click="bSize8_Click" Margin="3" />
                 </StackPanel>
             </Grid>
         </Border>

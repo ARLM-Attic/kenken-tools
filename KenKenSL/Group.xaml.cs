@@ -16,11 +16,18 @@ namespace KenKenSL
     public partial class Group : UserControl
     {
         public event EventHandler PaintClicked;
+        public event EventHandler UpGroupPressed;
+        public event EventHandler DownGroupPressed;
+        
         private List<Cell> cells;
         private int brushId;
         private CellManager cellManager;
         private bool isActiveGroup;
+        
+        //validation
         private Brush tbTotalValidBrush;
+        private static readonly Brush tbTotalNotValidBrush = new SolidColorBrush(Colors.Red);
+        private const int notValidTotal = int.MinValue;
 
         public Group()
         {
@@ -61,16 +68,12 @@ namespace KenKenSL
 
         public int Total
         {
-            get
-            {
-                int total = 0;
-                try
-                {
-                    total = int.Parse(this.tbTotal.Text,CultureInfo.CurrentCulture);
-                }
-                catch (FormatException) { }
-                return total;
-            }
+            get { return getTotal(); }
+        }
+
+        public bool IsValid
+        {
+            get { return getTotal() != notValidTotal; }
         }
 
         public string Operation
@@ -84,35 +87,22 @@ namespace KenKenSL
             }
         }
 
-        internal IEnumerable<Cell> Cells
-        {
-            get { return this.cells; }
-        }
-
         public int CellCount
         {
             get { return this.cells.Count; }
         }
 
-        public bool IsValid
+        internal IEnumerable<Cell> Cells
         {
-            get
-            {
-                if (string.IsNullOrEmpty(tbTotal.Text))
-                    return false;
-                else
-                {
-                    try
-                    {
-                        int total = int.Parse(this.tbTotal.Text,CultureInfo.CurrentCulture);
-                        return true;
-                    }
-                    catch (FormatException) { }
-                    return false;
-                }
-            }
+            get { return this.cells; }
         }
 
+        public void FocusTotal()
+        {
+            this.tbTotal.Focus();
+        }
+
+        #region cell management
         internal CellManager CellManager
         {
             set { this.cellManager = value; }
@@ -177,6 +167,9 @@ namespace KenKenSL
             }
             return remove;
         }
+        #endregion
+
+        #region private methods
 
         /// <summary>
         /// Checks to see if removing a cell
@@ -284,6 +277,28 @@ namespace KenKenSL
             topMostLeftMost.Representation.GroupLabel = label;
         }
 
+        /// <summary>
+        /// gets the total entered by the user
+        /// </summary>
+        /// <returns>total, Group.notValidTotal if invalid</returns>
+        private int getTotal()
+        {
+            if (string.IsNullOrEmpty(tbTotal.Text))
+                return notValidTotal;
+            else
+            {
+                try
+                {
+                    int total = int.Parse(this.tbTotal.Text, CultureInfo.CurrentCulture);
+                    this.tbTotal.Background = this.tbTotalValidBrush;
+                    return total;
+                }
+                catch (FormatException) { }
+                this.tbTotal.Background = tbTotalNotValidBrush;
+                return notValidTotal;
+            }
+        }
+
         private void setCellBrushes()
         {
             this.LayoutRoot.Background = internalBrush;
@@ -301,14 +316,41 @@ namespace KenKenSL
 
         private void tbTotal_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (!string.IsNullOrEmpty(this.tbTotal.Text))
+            {
+                int len = this.tbTotal.Text.Length;
+                string strOp = this.tbTotal.Text.Substring(len - 1, 1);
+                bool opFound = true;
+                switch (strOp)
+                {
+                    case "+":
+                        this.cbOperation.SelectedIndex = 0;
+                        break;
+                    case "-":
+                        this.cbOperation.SelectedIndex = 1;
+                        break;
+                    case "*":
+                        this.cbOperation.SelectedIndex = 2;
+                        break;
+                    case "/":
+                        this.cbOperation.SelectedIndex = 3;
+                        break;
+                    case " ":
+                        this.cbOperation.SelectedIndex = 4;
+                        break;
+                    default:
+                        opFound = false;
+                        break;
+                }
+                if (opFound)
+                {
+                    this.tbTotal.Text = this.tbTotal.Text.Substring(0, len - 1);
+                }
+            }
+            
             if (this.IsValid)
             {
                 setOperationLabel();
-                this.tbTotal.Background = this.tbTotalValidBrush;
-            }
-            else
-            {
-                this.tbTotal.Background = new SolidColorBrush(Colors.Red);
             }
         }
 
@@ -319,11 +361,41 @@ namespace KenKenSL
                 PaintClicked(this, EventArgs.Empty);
             }
         }
-        private void components_Click(object sender, RoutedEventArgs e)
+
+        private void layout_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (PaintClicked != null)
             {
                 PaintClicked(this, EventArgs.Empty);
+                this.tbTotal.Focus();
+            }
+        }
+
+        private void components_Focused(object sender, RoutedEventArgs e)
+        {
+            if (PaintClicked != null)
+            {
+                PaintClicked(this, EventArgs.Empty);
+            }
+        }
+
+        #endregion
+
+        private void TextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Up)
+            {
+                if (UpGroupPressed != null)
+                {
+                    UpGroupPressed(this, EventArgs.Empty);
+                }
+            }
+            else if (e.Key == Key.Down)
+            {
+                if (DownGroupPressed != null)
+                {
+                    DownGroupPressed(this, EventArgs.Empty);
+                }
             }
         }
     }
